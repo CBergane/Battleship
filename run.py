@@ -21,7 +21,6 @@ def make_board(board):
           row_num += 1
              
 
-
 def make_ships(board):
     """
     CPU makes five ships
@@ -36,14 +35,14 @@ def locate_ship():
     """
     Makes the player set its ships
     """
-    row = input('Set your ship row on the battlefield 1-8')
+    row = input('Set your coordinates row on the battlefield 1-8: ')
     while row not in '12345678':
-        print('Set our ship on the board')
-        row = input('Set your ship row on the battlefield 1-8')
-    column = input('Set your ship row on the battlefield A-H').upper()
+        print('Coordinates is out of range')
+        row = input('Set your coordinates row on the battlefield 1-8: ')
+    column = input('Set your coordinates row on the battlefield A-H: ').upper()
     while column not in 'ABCDEFGH':
-        print('Set our ship on the board')
-        column = input('Set your ship row on the battlefield A-H').upper()
+        print('Coordinates is out of range')
+        column = input('Set your coordinates row on the battlefield A-H: ').upper()
         
     return int(row) -1, letters_to_numbers[column]
         
@@ -59,6 +58,25 @@ def ships_hit_count(board):
 
 make_ships(CPU_BOARD)
 turns = 10
-make_board(CPU_BOARD)
-make_board(PLAYER_BOARD)
-# while turns > 0:
+while turns > 0:
+    print('Battleship...')
+    print('Welcome to the battlefield!')
+    make_board(PLAYER_BOARD)
+    row, column = locate_ship()
+    if PLAYER_BOARD[row][column] == '-':
+        print('You have already guessed there...')
+    elif CPU_BOARD[row][column] == 'X':
+        print('It is a hit!')
+        PLAYER_BOARD[row][column] = 'X'
+        turns -= 1
+    else:
+        print('You missed!')
+        PLAYER_BOARD[row][column] = '-'
+        turns -= 1
+    if ships_hit_count(PLAYER_BOARD) == 5:
+        print(' Victory! All ships have been hit!')
+        break
+    print('You have ' + str(turns) + 'turns remaining')
+    if turns == 0:
+        print('Game over!')
+        break
