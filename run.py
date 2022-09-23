@@ -1,48 +1,30 @@
-
-from random import randint
-
-"""
-Creates a board 8*8 
-"""
-board = []
-
-for x in range(0, 8):
-    board.append(['O']* 8)
-
-def print_board(board):
-    """
-    Stack on top of each other and cleans up the board
-    """
-    for row in board:
-        print(' '.join(row))
-
-print_board(board)
+import random
 
 """
-Places CPUs ship on the board
+Defines the boards
 """
-def random_row(board):
-    return randint(0, len(board) - 1)
 
-def random_col(board):
-    return randint(0, len(board) - 1)
-        
-ship_row = random_row(board)
-ship_col = random_col(board)
+CPU_BOARD = [[' ']* 8 for x in range(8)]
+PLAYER_BOARD = [[' ']* 8 for x in range(8)]
 
-"""
-Player makes a shoot
-"""
-guess_row = int(input('Guess row: '))
-guess_col = int(input('Guess column: '))
+  
+letters_to_numbers = {"A": 0, "B": 1, "C": 2, "D": 3, "E": 4, "F": 5, "G": 6,"H": 7}
+    
+def make_board(board):
+      print("  A B C D E F G H")
+      print("  +-+-+-+-+-+-+-+")
 
-print(ship_row)
-print(ship_col)
+def make_ships():
+    pass
 
-"""Hit or no hit"""
-if guess_row == ship_row and guess_col == ship_col:
-    print('Good shoot you hit my ship')
-else:
-    print('Bad shoot you missed my ship')
-    board[guess_row][guess_col] = 'x'
-    print_board(board)
+def locate_ship():
+    pass
+
+def ships_hit_count():
+    pass
+
+
+deploy_ships()
+turns = 10
+while turns > 0:
+    pass
