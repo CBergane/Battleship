@@ -1,4 +1,4 @@
-from random import randint
+import random
 
 """
 Defines the boards
@@ -15,6 +15,9 @@ letters_to_numbers = {"A": 0, "B": 1, "C": 2, "D": 3,
 
 
 def make_board(board):
+        """
+        Create a board
+        """
         print("  A B C D E F G H")
         print("  ---------------")
         row_num = 1
@@ -28,9 +31,9 @@ def make_ships(board):
     CPU makes five ships
     """
     for ship in range(5):
-        ship_row, ship_column = randint(0, 7), randint(0, 7)
+        ship_row, ship_column = random.randint(0, 7), random.randint(0, 7)
         while board[ship_row][ship_column] == 'X':
-            ship_row, ship_column = randint(0, 7), randint(0, 7)
+            ship_row, ship_column = random.randint(0, 7), random.randint(0, 7)
         board[ship_row][ship_column] = 'X'
 
 
@@ -59,27 +62,29 @@ def ships_hit_count(board):
     return count
 
 
-make_ships(CPU_BOARD)
-print('Battleship...')
-print('Welcome to the battlefield!')
-turns = 10
-while turns > 0:
-    make_board(PLAYER_BOARD)
-    row, column = locate_ship()
-    if PLAYER_BOARD[row][column] == '-':
-        print('You have already guessed there...')
-    elif CPU_BOARD[row][column] == 'X':
-        print('It is a hit!')
-        PLAYER_BOARD[row][column] = 'X'
-        turns -= 1
-    else:
-        print('You missed!')
-        PLAYER_BOARD[row][column] = '-'
-        turns -= 1
-    if ships_hit_count(PLAYER_BOARD) == 5:
-        print(' Victory! All ships have been hit!\n')
-        break
-    print('You have ' + str(turns) + 'turns remaining')
-    if turns == 0:
-        print('Game over!')
-        break
+if __name__ == '__main__':
+    make_ships(CPU_BOARD)
+    print('Battleship...')
+    print('Welcome to the battlefield!')
+    turns = 15
+    while turns > 0:
+        make_board(PLAYER_BOARD)
+        row, column = locate_ship()
+        if PLAYER_BOARD[row][column] == '-':
+            print('You have already guessed there...')
+        elif CPU_BOARD[row][column] == 'X':
+            print('It is a hit!')
+            PLAYER_BOARD[row][column] = 'X'
+            turns -= 1
+        else:
+            print('You missed!')
+            PLAYER_BOARD[row][column] = '-'
+            turns -= 1
+        if ships_hit_count(PLAYER_BOARD) == 5:
+            print(' Victory! All ships have been hit!\n')
+            break
+        print('You have ' + str(turns) + 'turns remaining')
+        if turns == 0:
+            print('Game over!')
+            break
+        
