@@ -59,16 +59,29 @@ class main():
         """
         Makes the player make a shots
         """
-        column = input("Place coordinates column on the board 1-8: ")
-        while column not in "12345678":
-            print("Coordinates is out of range")
-            column = input("Place coordinates column on the board 1-8: ")
-        row = input("Place coordinates row on the board A-H: ").upper()
-        while row not in "ABCDEFGH":
-            print("Coordinates is out of range")
-            row = input("Place coordinates row on the board A-H: ").upper()
+        try:
+            x_row = input("Mark the row you are aiming for, A-H: ")
+            while x_row not in "ABCDEFGH":
+                print("Out of range, please try again")
+                x_row = input("Mark the row you are aiming for, A-H: ")
+            
+            y_col = input("Mark the column you are aiming for, 1-8: ")
+            while y_col not in "12345678":
+                print("Out of range, please try again")
+                y_col = input("Mark the column you are aiming for, 1-8: ")
+        except ValueError and KeyError:
+            print('Not a valid cordinate')
+            return self.locate_ship
+        # column = input("Place coordinates column on the board 1-8: ")
+        # while column not in "12345678":
+        #     print("Coordinates is out of range")
+        #     column = input("Place coordinates column on the board 1-8: ")
+        # row = input("Place coordinates row on the board A-H: ").upper()
+        # while row not in "ABCDEFGH":
+        #     print("Coordinates is out of range")
+        #     row = input("Place coordinates row on the board A-H: ").upper()
 
-        return int(column)-1, letters_to_numbers[row]
+        # return int(column)-1, letters_to_numbers[row]
 
 
     def ships_hit_count(self):
