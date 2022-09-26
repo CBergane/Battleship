@@ -4,34 +4,26 @@ import random
 Defines the boards
 """
 
-
-# Board for holding ship locations
-CPU_BOARD = [[" "] * 8 for x in range(8)]
-# Board for displaying hits and misses
-PLAYER_BOARD = [[" "] * 8 for x in range(8)]
-
-# A way to make you choose letters and convert them to numbers
-letters_to_numbers = {"A": 0, "B": 1, "C": 2, "D": 3,
-                      "E": 4, "F": 5, "G": 6, "H": 7}
-
 class BattleField():
     def __init__(self, board):
         self.board = board
-        
-        
+    
+    # A way to make you choose letters and convert them to numbers
+    def letters(self):
+        letters_to_numbers = {"A": 0, "B": 1, "C": 2, "D": 3, "E": 4, "F": 5, "G": 6, "H": 7}
+        return letters_to_numbers
+    
     def make_board(self):
             """
             Create a board
             """
-            board = []
-            for x in range(8):
-                board.append(["[ ]"] * 8)
+            print("  A B C D E F G H")
+            print("  +-+-+-+-+-+-+-+")
+            row_number = 1
+            for row in self.board:
+                print("%d|%s|" % (row_number, "|".join(row)))
+                row_number += 1
 
-            def print_board(board):
-                print("  ", " | ".join("12345678"))
-                for letter, row in zip("ABCDEFGH", board):
-                    print(letter, "|".join(row))
-            print_board(board)
 
 
 class main():
@@ -43,45 +35,32 @@ class main():
         """
         CPU makes five ships
         """
-        for ship in range(5):
+        for i in range(5):
             self.x_row, self.y_col = random.randint(0, 7), random.randint(0, 7)
             while self.board[self.x_row][self.y_col] == "X":
                 self.x_row, self.y_col = random.randint(0, 7), random.randint(0, 7)
             self.board[self.x_row][self.y_col] = "X"
         return self.board
-            # ship_row, ship_column = random.randint(0, 7), random.randint(0, 7)
-            # while board[ship_row][ship_column] == "X":
-            #     ship_row, ship_column = random.randint(0, 7), random.randint(0, 7)
-            # board[ship_row][ship_column] = "X"
             
 
     def locate_ship(self):
         """
-        Makes the player make a shots
+        Makes the player make a shots, need to ba a valid input to continue.
         """
-        try:
-            x_row = input("Mark the row you are aiming for, A-H: ")
-            while x_row not in "ABCDEFGH":
-                print("Out of range, please try again")
-                x_row = input("Mark the row you are aiming for, A-H: ")
-            
-            y_col = input("Mark the column you are aiming for, 1-8: ")
-            while y_col not in "12345678":
-                print("Out of range, please try again")
-                y_col = input("Mark the column you are aiming for, 1-8: ")
-        except ValueError and KeyError:
-            print('Not a valid cordinate')
-            return self.locate_ship
-        # column = input("Place coordinates column on the board 1-8: ")
-        # while column not in "12345678":
-        #     print("Coordinates is out of range")
-        #     column = input("Place coordinates column on the board 1-8: ")
-        # row = input("Place coordinates row on the board A-H: ").upper()
-        # while row not in "ABCDEFGH":
-        #     print("Coordinates is out of range")
-        #     row = input("Place coordinates row on the board A-H: ").upper()
-
-        # return int(column)-1, letters_to_numbers[row]
+        while True:
+            try:
+                x_row = input("Mark the row you are aiming for, 1-8: ")
+                while x_row not in '12345678':
+                    print("Out of range, please try again")
+                    x_row = input("Mark the row you are aiming for, 1-8: ")
+                
+                y_col = input("Mark the column you are aiming for, A-H: ").upper()
+                while y_col not in "ABCDEFGH":
+                    print("Out of range, please try again")
+                    y_col = input("Mark the column you are aiming for, A_H: ").upper()
+                return int(x_row) - 1, BattleField.letters(self)[y_col]
+            except ValueError:
+                print('Not a valid cordinate')
 
 
     def ships_hit_count(self):
@@ -94,31 +73,38 @@ class main():
 
     
 def Game():
-    main(CPU_BOARD)
-    print(CPU_BOARD)
+    cpu_board =  BattleField([[" "] * 8 for x in range(8)])
+    player_board = BattleField([[" "] * 8 for x in range(8)])
+    main.make_ships(cpu_board)
     print("Battleship...")
     print("Welcome to the battlefield!")
     turns = 15
     while turns > 0:
-        BattleField(PLAYER_BOARD)
-        row, column = locate_ship()
-        if PLAYER_BOARD[row][column] == "-":
-            print("You have already guessed there...")
-        elif CPU_BOARD[row][column] == "X":
-            print("It is a hit!")
-            PLAYER_BOARD[row][column] = "X"
-            turns -= 1
+        BattleField.make_board(cpu_board)
+        BattleField.make_board(player_board)
+        # Get users coordinates
+        user_x_row, user_y_col = main.locate_ship(object)
+        # Make sure no double shots
+        while player_board.board[user_x_row][user_y_col] == "-" or player_board.board[user_x_row][user_y_col] == "X":
+            print("Target already marked")
+            user_x_row, user_y_col = main.locate_ship(object)
+        # Check if is a hit
+        if cpu_board.board[user_x_row][user_y_col] == "X":
+            print("You sunk a ship!")
+            player_board.board[user_x_row][user_y_col] = "X"
         else:
-            print("You missed!")
-            PLAYER_BOARD[row][column] = "-"
+            print("You missed! Try again!")
+            player_board.board[user_x_row][user_y_col] = "-"
+        # Check if the player wins or loses
+        if main.ships_hit_count(player_board) == 5:
+            print("You won!")
+            break
+        else:
             turns -= 1
-        if ships_hit_count(PLAYER_BOARD) == 5:
-            print(" Victory! All ships have been hit!\n")
-            break
-        print("You have " + str(turns) + "turns remaining")
-        if turns == 0:
-            print("Game over!")
-            break
+            print(f"You have {turns} remaining to win")
+            if turns == 0:
+                print("You have lost!")
+                BattleField.make_board(player_board)
     
 
 if __name__ == "__main__":
