@@ -1,5 +1,10 @@
+"""
+Import library functions
+"""
 import random
 import time
+import sys
+
 
 class BattleField():
     """
@@ -7,19 +12,22 @@ class BattleField():
     """
     def __init__(self, board):
         self.board = board
+        
     
-    # A way to make you choose letters and convert them to numbers
     def letters(self):
+        """
+        Converts letters to numbers
+        """
         letters_to_numbers = {"A": 0, "B": 1, "C": 2, "D": 3,
                               "E": 4, "F": 5, "G": 6, "H": 7}
-        return letters_to_numbers
+        return letters_to_numbers    
     
     def make_board(self):
         """
         Create a board
         """
         print("  A B C D E F G H")
-        print("  +-+-+-+-+-+-+-+")
+        print("  ---------------")
         row_number = 1
         for row in self.board:
             print("%d|%s|" % (row_number, "|".join(row)))
@@ -27,7 +35,10 @@ class BattleField():
 
 
 
-class main():
+class Main():
+    """
+    Main function to make CPU place ships
+    """
     def __init__(self, board, y_col, x_row):
         self.board = board
         self.y_col = y_col
@@ -38,12 +49,13 @@ class main():
         """
         CPU makes five ships, and makes sure not to put it in the same location.
         """
-        for i in range(5):
+        for _ in range(5):
             self.x_row, self.y_col = random.randint(0, 7), random.randint(0, 7)
             while self.board[self.x_row][self.y_col] == "X":
                 self.x_row, self.y_col = random.randint(0, 7), random.randint(0, 7)
             self.board[self.x_row][self.y_col] = "X"
         return self.board
+
             
 
     def locate_ship(self):
@@ -67,6 +79,9 @@ class main():
 
 
     def ships_hit_count(self):
+        """
+        Counting numbers of hits
+        """
         count = 0
         for column in self.board:
             for row in column:
@@ -74,52 +89,61 @@ class main():
                     count += 1
         return count
 
-    
-def Game():
-    cpu_board =  BattleField([[" "] * 8 for x in range(8)])
-    player_board = BattleField([[" "] * 8 for x in range(8)])
-    main.make_ships(cpu_board)
-    print("Battleship...")
-    print("Welcome to the battlefield!")
-    turns = 15
-    while turns > 0:
-        BattleField.make_board(cpu_board)
-        BattleField.make_board(player_board)
-        # Get users coordinates
-        user_x_row, user_y_col = main.locate_ship(object)
-        # Make sure no double shots
-        while player_board.board[user_x_row][user_y_col] == "-" or player_board.board[user_x_row][user_y_col] == "X":
-            print("Target already marked")
-            user_x_row, user_y_col = main.locate_ship(object)
-        # Check if is a hit
-        if cpu_board.board[user_x_row][user_y_col] == "X":
-            print("You sunk a ship!")
-            player_board.board[user_x_row][user_y_col] = "X"
-        else:
-            print("You missed! Try again!")
-            player_board.board[user_x_row][user_y_col] = "-"
-        # Check if the player wins or loses
-        if main.ships_hit_count(player_board) == 5:
-            print("You won!")
-            restart()
-        else:
-            turns -= 1
-            print(f"You have {turns} remaining to win")
-            if turns == 0:
-                print("You have lost!")
-                BattleField.make_board(player_board)
-                time.sleep(2)
+
+def game():
+    """
+    Main game logic
+    """
+    while True:
+        cpu_board =  BattleField([[" "] * 8 for x in range(8)])
+        player_board = BattleField([[" "] * 8 for x in range(8)])
+        Main.make_ships(cpu_board)
+        print("Battleship...")
+        print("Welcome to the battlefield!")
+        turns = 15
+        while turns > 0:
+            BattleField.make_board(cpu_board)
+            BattleField.make_board(player_board)
+            # Get users coordinates
+            user_x_row, user_y_col = Main.locate_ship(object)
+            # Make sure no double shots
+            while player_board.board[user_x_row][user_y_col] == "-" or player_board.board[user_x_row][user_y_col] == "X":
+                print("Target already marked")
+                user_x_row, user_y_col = Main.locate_ship(object)
+            # Check if is a hit
+            if cpu_board.board[user_x_row][user_y_col] == "X":
+                print("You sunk a ship!")
+                player_board.board[user_x_row][user_y_col] = "X"
+            else:
+                print("You missed! Try again!")
+                player_board.board[user_x_row][user_y_col] = "-"
+            # Check if the player wins or loses
+            if Main.ships_hit_count(player_board) == 5:
+                print("You won!")
                 restart()
+            else:
+                turns -= 1
+                print(f"You have {turns} remaining to win")
+                if turns == 0:
+                    print("You have lost!")
+                    BattleField.make_board(player_board)
+                    restart()
 
 def restart():
-    player_choice = input("Would you like to try again? Type 'Yes' or 'No' \n\n")
+    """
+    Restart the game
+    """
+    player_choice = input("Would you like to try again? Type 'Yes' or 'No' \n")
     
-    if player_choice.lower == "No":
-        return False
+    if player_choice.lower != "Yes":
+        game()
 
-    elif player_choice.lower == "Yes":
-        return True
-    
+    else:
+        time.sleep(1)
+        print("Thanks for playing!")
+        time.sleep(2)
+        print("Exiting...")
+        sys.exit(0)
 
 if __name__ == "__main__":
-    Game()
+    game()
