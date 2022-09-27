@@ -120,30 +120,35 @@ def game():
             # Check if the player wins or loses
             if Main.ships_hit_count(player_board) == 5:
                 print("You won!")
-                restart()
+                print("Would you like to try again? Type 'Yes' or 'No'")
+                player_choice = input()
+                if player_choice == "yes":
+                    break
+                elif player_choice == "no":
+                    exit_game()
             else:
                 turns -= 1
                 print(f"You have {turns} remaining to win")
                 if turns == 0:
                     print("You have lost!")
                     BattleField.make_board(player_board)
-                    restart()
+                    print("Would you like to try again? Type 'Yes' or 'No'")
+                    player_choice = input()
+                    if player_choice == "yes":
+                        break
+                    elif player_choice == "no":
+                        exit_game()
 
-def restart():
+def exit_game():
     """
-    Restart the game
+    Exit the game
     """
-    player_choice = input("Would you like to try again? Type 'Yes' or 'No' \n")
-    
-    if player_choice.lower != "Yes":
-        game()
+    time.sleep(1)
+    print("Thanks for playing!")
+    time.sleep(2)
+    print("Exiting...")
+    sys.exit(0)
 
-    else:
-        time.sleep(1)
-        print("Thanks for playing!")
-        time.sleep(2)
-        print("Exiting...")
-        sys.exit(0)
 
 if __name__ == "__main__":
     game()
