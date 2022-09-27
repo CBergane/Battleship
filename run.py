@@ -1,39 +1,42 @@
 import random
-
-"""
-Defines the boards
-"""
+import time
 
 class BattleField():
+    """
+    Defines the BattleField
+    """
     def __init__(self, board):
         self.board = board
     
     # A way to make you choose letters and convert them to numbers
     def letters(self):
-        letters_to_numbers = {"A": 0, "B": 1, "C": 2, "D": 3, "E": 4, "F": 5, "G": 6, "H": 7}
+        letters_to_numbers = {"A": 0, "B": 1, "C": 2, "D": 3,
+                              "E": 4, "F": 5, "G": 6, "H": 7}
         return letters_to_numbers
     
     def make_board(self):
-            """
-            Create a board
-            """
-            print("  A B C D E F G H")
-            print("  +-+-+-+-+-+-+-+")
-            row_number = 1
-            for row in self.board:
-                print("%d|%s|" % (row_number, "|".join(row)))
-                row_number += 1
+        """
+        Create a board
+        """
+        print("  A B C D E F G H")
+        print("  +-+-+-+-+-+-+-+")
+        row_number = 1
+        for row in self.board:
+            print("%d|%s|" % (row_number, "|".join(row)))
+            row_number += 1
 
 
 
 class main():
-    def __init__(self, board):
+    def __init__(self, board, y_col, x_row):
         self.board = board
+        self.y_col = y_col
+        self.x_row = x_row
         
 
     def make_ships(self):
         """
-        CPU makes five ships
+        CPU makes five ships, and makes sure not to put it in the same location.
         """
         for i in range(5):
             self.x_row, self.y_col = random.randint(0, 7), random.randint(0, 7)
@@ -60,7 +63,7 @@ class main():
                     y_col = input("Mark the column you are aiming for, A_H: ").upper()
                 return int(x_row) - 1, BattleField.letters(self)[y_col]
             except ValueError:
-                print('Not a valid cordinate')
+                print('Not a valid coordinates')
 
 
     def ships_hit_count(self):
@@ -98,13 +101,24 @@ def Game():
         # Check if the player wins or loses
         if main.ships_hit_count(player_board) == 5:
             print("You won!")
-            break
+            restart()
         else:
             turns -= 1
             print(f"You have {turns} remaining to win")
             if turns == 0:
                 print("You have lost!")
                 BattleField.make_board(player_board)
+                time.sleep(2)
+                restart()
+
+def restart():
+    player_choice = input("Would you like to try again? Type 'Yes' or 'No' \n\n")
+    
+    if player_choice.lower == "No":
+        return False
+
+    elif player_choice.lower == "Yes":
+        return True
     
 
 if __name__ == "__main__":
