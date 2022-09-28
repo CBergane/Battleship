@@ -5,8 +5,9 @@ import random
 import time
 import sys
 
+SHOTS = 0
 LETTER_NUM = {"A": 0, "B": 1, "C": 2, "D": 3,
-              "E": 4, "F": 5, "G": 6, "H": 7}
+              "E": 4, "F": 5, "G": 6}
 
 def welcome():
     """
@@ -17,16 +18,13 @@ def welcome():
     print("Do you want to play the game or have a look at the rules?")
     print("Type 'G' for game and 'R' for rules.")
     player_choice = input(" \n").upper()
+    while player_choice != "G" and player_choice != "R":
+        print("Type 'G' for game and 'R' for rules.")
+        player_choice = input(" \n").upper()
     if player_choice == 'G':
-        game()
+        difficulty_level()
     elif player_choice == 'R':
         rules()
-
-
-    else:
-        print("Not a valid input....")
-        time.sleep(2)
-        welcome()
 
 
 def rules():
@@ -37,20 +35,36 @@ def rules():
     time.sleep(3)
     print("The game will randomly generate eight ships")
     time.sleep(3)
-    print("You have 20 shots at your disposal.")
+    print("You have a number of shots at your disposal.")
     time.sleep(3)
     print("Sink five ships before you run out of shots.")
     time.sleep(3)
     print("Are you ready to begin? Y/N")
     player_choice = input(" \n").upper()
+    while player_choice != "Y" and player_choice != "N":
+        print("Are you ready to begin? Y/N")
+        player_choice = input(" \n").upper()
     if player_choice == "Y":
-        game()
+        difficulty_level()
     elif player_choice == "N":
-        exit_game()
-    else:
-        print("Not a valid choice..")
-        time.sleep(2)
-        rules()
+        welcome()
+
+def difficulty_level():
+    """
+    Makes the player chose between different difficulty levels
+    """
+    global SHOTS
+    difficulty = input("Choose your difficulty level: easy, medium, hard\n")
+    while difficulty not in "easy" "medium" "hard":
+        difficulty = input("Choose your difficulty level: easy, medium, hard\n")
+    if difficulty == "easy":
+        SHOTS = 30
+    if difficulty == "medium":
+        SHOTS = 20
+    if difficulty == "hard":
+        SHOTS = 10
+        return SHOTS
+    game()
 
 
 class BattleField():
@@ -65,7 +79,7 @@ class BattleField():
         """
         Create a board
         """
-        print("  A  B  C  D  E  F  G  H")
+        print("  A  B  C  D  E  F  G ")
         row_number = 1
         for row in self.board:
             print(str(row_number)+"["+"][".join(row)+"]")
@@ -102,15 +116,14 @@ class Main():
         """
         while True:
             try:
-                x_row = input("Mark the row you are aiming for, 1-8: \n")
-                while x_row not in '12345678':
+                x_row = input("Mark the row you are aiming for, 1-7: \n")
+                while x_row not in '1234567':
                     print("Out of range, please try again")
-                    x_row = input("Mark the row you are aiming for, 1-8: \n")
-
-                y_col = input("Mark the column you are aiming for, A-H: \n").upper()
-                while y_col not in "ABCDEFGH":
+                    x_row = input("Mark the row you are aiming for, 1-7: \n")
+                y_col = input("Mark the column you are aiming for, A-G: \n").upper()
+                while y_col not in "ABCDEFG":
                     print("Out of range, please try again")
-                    y_col = input("Mark the column you are aiming for, A_H: \n").upper()
+                    y_col = input("Mark the column you are aiming for, A-G: \n").upper()
                 return int(x_row) - 1, LETTER_NUM[y_col]
             except (ValueError, KeyError):
                 print('Not a valid coordinates')
@@ -133,12 +146,12 @@ def game():
     Main game logic
     """
     while True:
-        cpu_board =  BattleField([[" "] * 8 for x in range(8)])
-        p_board = BattleField([[" "] * 8 for x in range(8)])
+        cpu_board =  BattleField([[" "] * 7 for x in range(7)])
+        p_board = BattleField([[" "] * 7 for x in range(7)])
         Main.make_ships(cpu_board)
         print("Battleship...")
         print("Welcome to the battlefield!")
-        turns = 20
+        turns = SHOTS
         while turns > 0:
             BattleField.make_board(p_board)
             # Get users coordinates
