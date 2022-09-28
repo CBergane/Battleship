@@ -5,6 +5,9 @@ import random
 import time
 import sys
 
+LETTER_NUM = {"A": 0, "B": 1, "C": 2, "D": 3,
+              "E": 4, "F": 5, "G": 6, "H": 7}
+
 def welcome():
     """
     Welcomes the player to the game, gives choice of rules or just play the game.
@@ -30,13 +33,13 @@ def rules():
     """
     Explanation of the rules.
     """
-    print("Your goals are to sink the games ships")
+    print("Your goals are to sink five of the games ships")
     time.sleep(3)
-    print("The game will randomly generate five ships")
+    print("The game will randomly generate eight ships")
     time.sleep(3)
-    print("You have 15 shots at your disposal.")
+    print("You have 20 shots at your disposal.")
     time.sleep(3)
-    print("Sink all five ships before you run out of shots.")
+    print("Sink five ships before you run out of shots.")
     time.sleep(3)
     print("Are you ready to begin? Y/N")
     player_choice = input(" \n").upper()
@@ -57,14 +60,6 @@ class BattleField():
     def __init__(self, board):
         self.board = board
 
-
-    def letters(self):
-        """
-        Converts letters to numbers
-        """
-        letters_to_numbers = {"A": 0, "B": 1, "C": 2, "D": 3,
-                              "E": 4, "F": 5, "G": 6, "H": 7}
-        return letters_to_numbers
 
     def make_board(self):
         """
@@ -92,7 +87,7 @@ class Main():
         """
         CPU makes five ships, and makes sure not to put it in the same location.
         """
-        for _ in range(5):
+        for _ in range(8):
             self.x_row, self.y_col = random.randint(0, 7), random.randint(0, 7)
             while self.board[self.x_row][self.y_col] == "X":
                 self.x_row, self.y_col = random.randint(0, 7), random.randint(0, 7)
@@ -116,7 +111,7 @@ class Main():
                 while y_col not in "ABCDEFGH":
                     print("Out of range, please try again")
                     y_col = input("Mark the column you are aiming for, A_H: \n").upper()
-                return int(x_row) - 1, BattleField.letters(self)[y_col]
+                return int(x_row) - 1, LETTER_NUM[y_col]
             except (ValueError, KeyError):
                 print('Not a valid coordinates')
 
@@ -143,7 +138,7 @@ def game():
         Main.make_ships(cpu_board)
         print("Battleship...")
         print("Welcome to the battlefield!")
-        turns = 15
+        turns = 20
         while turns > 0:
             BattleField.make_board(p_board)
             # Get users coordinates
@@ -170,7 +165,7 @@ def game():
                     exit_game()
             else:
                 turns -= 1
-                print(f"You have {turns} remaining to win")
+                print(f"You have {turns} remaining!")
                 if turns == 0:
                     print("You have lost!")
                     BattleField.make_board(p_board)
