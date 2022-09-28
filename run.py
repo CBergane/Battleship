@@ -169,6 +169,7 @@ def game():
                 if turns == 0:
                     print("You have lost!")
                     BattleField.make_board(p_board)
+                    BattleField.make_board(cpu_board)
                     print("Would you like to try again? Type 'Yes' or 'No'")
                     player_choice = input(" \n").lower()
                     if player_choice == "yes":
