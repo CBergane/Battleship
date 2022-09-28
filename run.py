@@ -70,11 +70,10 @@ class BattleField():
         """
         Create a board
         """
-        print("  A B C D E F G H")
-        print("  ---------------")
+        print("  A  B  C  D  E  F  G  H")
         row_number = 1
         for row in self.board:
-            print("%d|%s|" % (row_number, "|".join(row)))
+            print(str(row_number)+"["+"][".join(row)+"]")
             row_number += 1
 
 
@@ -118,7 +117,7 @@ class Main():
                     print("Out of range, please try again")
                     y_col = input("Mark the column you are aiming for, A_H: ").upper()
                 return int(x_row) - 1, BattleField.letters(self)[y_col]
-            except ValueError:
+            except (ValueError, KeyError):
                 print('Not a valid coordinates')
 
 
@@ -140,29 +139,29 @@ def game():
     """
     while True:
         cpu_board =  BattleField([[" "] * 8 for x in range(8)])
-        player_board = BattleField([[" "] * 8 for x in range(8)])
+        p_board = BattleField([[" "] * 8 for x in range(8)])
         Main.make_ships(cpu_board)
         print("Battleship...")
         print("Welcome to the battlefield!")
         turns = 15
         while turns > 0:
             BattleField.make_board(cpu_board)
-            BattleField.make_board(player_board)
+            BattleField.make_board(p_board)
             # Get users coordinates
-            user_x_row, user_y_col = Main.locate_ship(object)
+            x_row, y_col = Main.locate_ship(object)
             # Make sure no double shots
-            while player_board.board[user_x_row][user_y_col] == "-" or player_board.board[user_x_row][user_y_col] == "X":
+            while p_board.board[x_row][y_col] == "-" or p_board.board[x_row][y_col] == "X":
                 print("Target already marked")
-                user_x_row, user_y_col = Main.locate_ship(object)
+                x_row, y_col = Main.locate_ship(object)
             # Check if is a hit
-            if cpu_board.board[user_x_row][user_y_col] == "X":
+            if cpu_board.board[x_row][y_col] == "X":
                 print("You sunk a ship!")
-                player_board.board[user_x_row][user_y_col] = "X"
+                p_board.board[x_row][y_col] = "X"
             else:
                 print("You missed! Try again!")
-                player_board.board[user_x_row][user_y_col] = "-"
+                p_board.board[x_row][y_col] = "-"
             # Check if the player wins or loses
-            if Main.ships_hit_count(player_board) == 5:
+            if Main.ships_hit_count(p_board) == 5:
                 print("You won!")
                 print("Would you like to try again? Type 'Yes' or 'No'")
                 player_choice = input()
@@ -175,7 +174,7 @@ def game():
                 print(f"You have {turns} remaining to win")
                 if turns == 0:
                     print("You have lost!")
-                    BattleField.make_board(player_board)
+                    BattleField.make_board(p_board)
                     print("Would you like to try again? Type 'Yes' or 'No'")
                     player_choice = input().lower()
                     if player_choice == "yes":
