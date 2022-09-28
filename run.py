@@ -13,7 +13,7 @@ def welcome():
     time.sleep(1.5)
     print("Do you want to play the game or have a look at the rules?")
     print("Type 'G' for game and 'R' for rules.")
-    player_choice = input().upper()
+    player_choice = input("\n").upper()
     if player_choice == 'G':
         game()
     elif player_choice == 'R':
@@ -39,7 +39,7 @@ def rules():
     print("Sink all five ships before you run out of shots.")
     time.sleep(3)
     print("Are you ready to begin? Y/N")
-    player_choice = input().upper()
+    player_choice = input("\n").upper()
     if player_choice == "Y":
         game()
     elif player_choice == "N":
@@ -107,15 +107,15 @@ class Main():
         """
         while True:
             try:
-                x_row = input("Mark the row you are aiming for, 1-8: ")
+                x_row = input("Mark the row you are aiming for, 1-8: \n")
                 while x_row not in '12345678':
                     print("Out of range, please try again")
-                    x_row = input("Mark the row you are aiming for, 1-8: ")
+                    x_row = input("Mark the row you are aiming for, 1-8: \n")
 
-                y_col = input("Mark the column you are aiming for, A-H: ").upper()
+                y_col = input("Mark the column you are aiming for, A-H: \n").upper()
                 while y_col not in "ABCDEFGH":
                     print("Out of range, please try again")
-                    y_col = input("Mark the column you are aiming for, A_H: ").upper()
+                    y_col = input("Mark the column you are aiming for, A_H: \n").upper()
                 return int(x_row) - 1, BattleField.letters(self)[y_col]
             except (ValueError, KeyError):
                 print('Not a valid coordinates')
@@ -145,7 +145,6 @@ def game():
         print("Welcome to the battlefield!")
         turns = 15
         while turns > 0:
-            BattleField.make_board(cpu_board)
             BattleField.make_board(p_board)
             # Get users coordinates
             x_row, y_col = Main.locate_ship(object)
@@ -164,7 +163,7 @@ def game():
             if Main.ships_hit_count(p_board) == 5:
                 print("You won!")
                 print("Would you like to try again? Type 'Yes' or 'No'")
-                player_choice = input()
+                player_choice = input("\n")
                 if player_choice == "yes":
                     break
                 elif player_choice == "no":
@@ -176,7 +175,7 @@ def game():
                     print("You have lost!")
                     BattleField.make_board(p_board)
                     print("Would you like to try again? Type 'Yes' or 'No'")
-                    player_choice = input().lower()
+                    player_choice = input("\n").lower()
                     if player_choice == "yes":
                         break
                     elif player_choice == "no":
