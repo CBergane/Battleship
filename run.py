@@ -5,6 +5,50 @@ import random
 import time
 import sys
 
+def welcome():
+    """
+    Welcomes the player to the game, gives choice of rules or just play the game.
+    """
+    print("Welcome to Battleships!")
+    time.sleep(1.5)
+    print("Do you want to play the game or have a look at the rules?")
+    print("Type 'G' for game and 'R' for rules.")
+    player_choice = input().upper()
+    if player_choice == 'G':
+        game()
+    elif player_choice == 'R':
+        rules()
+
+
+    else:
+        print("Not a valid input....")
+        time.sleep(2)
+        welcome()
+
+
+def rules():
+    """
+    Explanation of the rules.
+    """
+    print("Your goals are to sink the games ships")
+    time.sleep(3)
+    print("The game will randomly generate five ships")
+    time.sleep(3)
+    print("You have 15 shots at your disposal.")
+    time.sleep(3)
+    print("Sink all five ships before you run out of shots.")
+    time.sleep(3)
+    print("Are you ready to begin? Y/N")
+    player_choice = input().upper()
+    if player_choice == "Y":
+        game()
+    elif player_choice == "N":
+        exit_game()
+    else:
+        print("Not a valid choice..")
+        time.sleep(2)
+        rules()
+
 
 class BattleField():
     """
@@ -12,16 +56,16 @@ class BattleField():
     """
     def __init__(self, board):
         self.board = board
-        
-    
+
+
     def letters(self):
         """
         Converts letters to numbers
         """
         letters_to_numbers = {"A": 0, "B": 1, "C": 2, "D": 3,
                               "E": 4, "F": 5, "G": 6, "H": 7}
-        return letters_to_numbers    
-    
+        return letters_to_numbers
+
     def make_board(self):
         """
         Create a board
@@ -43,7 +87,7 @@ class Main():
         self.board = board
         self.y_col = y_col
         self.x_row = x_row
-        
+
 
     def make_ships(self):
         """
@@ -56,7 +100,7 @@ class Main():
             self.board[self.x_row][self.y_col] = "X"
         return self.board
 
-            
+
 
     def locate_ship(self):
         """
@@ -68,7 +112,7 @@ class Main():
                 while x_row not in '12345678':
                     print("Out of range, please try again")
                     x_row = input("Mark the row you are aiming for, 1-8: ")
-                
+
                 y_col = input("Mark the column you are aiming for, A-H: ").upper()
                 while y_col not in "ABCDEFGH":
                     print("Out of range, please try again")
@@ -133,7 +177,7 @@ def game():
                     print("You have lost!")
                     BattleField.make_board(player_board)
                     print("Would you like to try again? Type 'Yes' or 'No'")
-                    player_choice = input()
+                    player_choice = input().lower()
                     if player_choice == "yes":
                         break
                     elif player_choice == "no":
@@ -151,4 +195,4 @@ def exit_game():
 
 
 if __name__ == "__main__":
-    game()
+    welcome()
