@@ -22,5 +22,13 @@
    },
    "files.autoSave": "off",
    "workbench.colorTheme": "Visual Studio Dark",
-   "editor.defaultFormatter": "HookyQR.beautify"
+   "editor.defaultFormatter": "HookyQR.beautify",
+   "cSpell.customDictionaries": {
+      "custom-dictionary-workspace": {
+         "name": "custom-dictionary-workspace",
+         "path": "${workspaceFolder:Battleship-1}/.cspell/custom-dictionary-workspace.txt",
+         "addWords": true,
+         "scope": "workspace"
+      }
+   }
 }

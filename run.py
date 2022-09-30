@@ -120,7 +120,6 @@ class Main():
                 while x_row not in '1234567':
                     print("Out of range, please try again")
                     x_row = input("Mark the row you are aiming for, 1-7: \n")
-
                 y_col = input("Mark the column you are aiming for, A-G: \n").upper()
                 while y_col not in "ABCDEFGH":
                     print("Out of range, please try again")
@@ -156,6 +155,7 @@ def game():
         turns = SHOTS
         while turns > 0:
             BattleField.make_board(p_board)
+            BattleField.make_board(cpu_board)
             # Get users coordinates
             x_row, y_col = Main.locate_ship(object)
             # Make sure no double shots
@@ -172,6 +172,8 @@ def game():
             # Check if the player wins or loses
             if Main.ships_hit_count(p_board) == 5:
                 print("You won!")
+                BattleField.make_board(p_board)
+                BattleField.make_board(cpu_board)
                 print("Would you like to try again? Type 'Yes' or 'No'")
                 player_choice = input(" \n")
                 if player_choice == "yes":
