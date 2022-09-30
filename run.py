@@ -32,13 +32,15 @@ def rules():
     Explanation of the rules.
     """
     print("Your goals are to sink five of the games ships")
-    time.sleep(3)
+    time.sleep(2)
     print("The game will randomly generate eight ships")
-    time.sleep(3)
+    time.sleep(2)
     print("You have a number of shots at your disposal.")
-    time.sleep(3)
+    time.sleep(2)
+    print("Easy: 30 shots, Medium: 20 shots, Hard: 10 shots.")
+    time.sleep(2)
     print("Sink five ships before you run out of shots.")
-    time.sleep(3)
+    time.sleep(2)
     print("Are you ready to begin? Y/N")
     player_choice = input(" \n").upper()
     while player_choice != "Y" and player_choice != "N":
@@ -63,7 +65,6 @@ def difficulty_level():
         SHOTS = 20
     if difficulty == "hard":
         SHOTS = 10
-        return SHOTS
     game()
 
 
@@ -101,10 +102,10 @@ class Main():
         """
         CPU makes five ships, and makes sure not to put it in the same location.
         """
-        for _ in range(8):
-            self.x_row, self.y_col = random.randint(0, 7), random.randint(0, 7)
+        for _ in range(7):
+            self.x_row, self.y_col = random.randint(0, 6), random.randint(0, 6)
             while self.board[self.x_row][self.y_col] == "X":
-                self.x_row, self.y_col = random.randint(0, 7), random.randint(0, 7)
+                self.x_row, self.y_col = random.randint(0, 6), random.randint(0, 6)
             self.board[self.x_row][self.y_col] = "X"
         return self.board
 
@@ -120,8 +121,9 @@ class Main():
                 while x_row not in '1234567':
                     print("Out of range, please try again")
                     x_row = input("Mark the row you are aiming for, 1-7: \n")
+
                 y_col = input("Mark the column you are aiming for, A-G: \n").upper()
-                while y_col not in "ABCDEFG":
+                while y_col not in "ABCDEFGH":
                     print("Out of range, please try again")
                     y_col = input("Mark the column you are aiming for, A-G: \n").upper()
                 return int(x_row) - 1, LETTER_NUM[y_col]
@@ -151,6 +153,7 @@ def game():
         Main.make_ships(cpu_board)
         print("Battleship...")
         print("Welcome to the battlefield!")
+        print(f"You have {SHOTS} shots at your disposal")
         turns = SHOTS
         while turns > 0:
             BattleField.make_board(p_board)
