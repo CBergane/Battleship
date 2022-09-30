@@ -124,7 +124,7 @@ Try it out [here](https://battleshipcodeinstitute.herokuapp.com/)
 
 ### Bugs
 
-* Input out of range at the shot placement. Solved it with putting -1 in the return value on line 127.
+* Input out of range at the shot placement. Solved it by putting -1 in the return value on line 127.
 * No remaining bugs, only the one warning about the global variable.
 
 [Back to top ⇧](#Battleships)
@@ -143,8 +143,8 @@ I used Heruko to deploy my application.
 7. Select the project that was relevant for the project.
 8. Go to the settings tab.
 9. Select the buildpack.
-10. Select Python, save changes.
-11. Select NodeJs, save changes.
+10. Select Python, and save changes.
+11. Select NodeJs, and save changes.
 12. Make sure that Python is first and not NodeJs.
 13. Add a config var. The key will be "Port" and the value is "8000".
 13. Navigate to the deploy tab.
