@@ -74,7 +74,7 @@ Try it out [here](https://battleshipcodeinstitute.herokuapp.com/)
 
     - At the end of the game, win or lose, the player will have a look at where the ships were hidden and a choice to try again, if the player chooses "try again" they will go back to the difficulty and go from there.
 
-![Exiting the game](readmefiles/exiting-game.jpeg)
+![Exiting the game](readmefiles/exiting-the-game.jpeg)
 
     - If the player chooses no the exit_game command will be run and exits the app.
 
