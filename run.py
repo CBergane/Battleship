@@ -188,7 +188,7 @@ def game():
                     print("Would you like to try again? Type 'Yes' or 'No'")
                     player_choice = input(" \n").lower()
                     if player_choice == "yes":
-                        break
+                        difficulty_level()
                     elif player_choice == "no":
                         exit_game()
 
