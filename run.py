@@ -56,9 +56,9 @@ def difficulty_level():
     Makes the player chose between different difficulty levels
     """
     global SHOTS
-    difficulty = input("Choose your difficulty level: easy, medium, hard\n")
-    while difficulty not in "easy" "medium" "hard":
-        difficulty = input("Choose your difficulty level: easy, medium, hard\n")
+    difficulty = input("Choose your difficulty level: easy, medium, hard\n").lower()
+    while difficulty != "easy" and difficulty != "medium" and difficulty != "hard":
+        difficulty = input("Choose your difficulty level: easy, medium, hard\n").lower()
     if difficulty == "easy":
         SHOTS = 30
     if difficulty == "medium":
@@ -155,7 +155,6 @@ def game():
         turns = SHOTS
         while turns > 0:
             BattleField.make_board(p_board)
-            BattleField.make_board(cpu_board)
             # Get users coordinates
             x_row, y_col = Main.locate_ship(object)
             # Make sure no double shots
