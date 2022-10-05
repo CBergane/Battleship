@@ -38,7 +38,7 @@ Try it out [here](https://battleshipcodeinstitute.herokuapp.com/)
 
 * You will get a choice of difficulty levels to choose from, easy, medium or hard. The number of shots will be decided here.
 
-* 
+* You will win the game if you find five of the eight ships on the board. If you can't find five ships when you run out of shots, you will lose the game.
 
 ### User Experience
 
