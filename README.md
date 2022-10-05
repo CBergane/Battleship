@@ -56,40 +56,30 @@ Try it out [here](https://battleshipcodeinstitute.herokuapp.com/)
 
 ### The Game
 
+* This will be the first choice for the player, to just start the game or have a look at the rules for the game.
+
 ![First choice](readmefiles/first-choice.jpeg)
 
-
-This will be the first choice for the player, to just start the game or have a look at the rules for the game.
-
+* If the player chooses rules, this will aper for the player and a choice to start the game or just go back to the previous menu.
 
 ![Rules](readmefiles/rules.jpeg)
 
-
-If the player chooses rules, this will aper for the player and a choice to start the game or just go back to the previous menu.
-
+*The outcome will be the same if the player starts the game from the main menu or the choices from the rules.
 
 ![Difficulty level](readmefiles/difficulty.jpeg)
 
-
-The outcome will be the same if the player starts the game from the main menu or the choices from the rules.
-
+* From this point on the player will choose rows and columns for each shot.
 
 ![Game](readmefiles/game.jpeg)
 
-
-From this point on the player will choose rows and columns for each shot.
+* At the end of the game, win or lose, the player will have a look at where the ships were hidden and a choice to try again, if the player chooses "try again" they will go back to the difficulty and go from there.
 
 
 ![End of game](readmefiles/end-of-game.jpeg)
 
-
-At the end of the game, win or lose, the player will have a look at where the ships were hidden and a choice to try again, if the player chooses "try again" they will go back to the difficulty and go from there.
-
+* If the player chooses no the exit_game command will be run and exits the app.
 
 ![Exiting the game](readmefiles/exiting-the-game.jpeg)
-
-
-If the player chooses no the exit_game command will be run and exits the app.
 
 
 [Back to top ⇧](#Battleships)
