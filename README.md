@@ -64,7 +64,7 @@ Try it out [here](https://battleshipcodeinstitute.herokuapp.com/)
 
 ![Rules](readmefiles/rules.jpeg)
 
-*The outcome will be the same if the player starts the game from the main menu or the choices from the rules.
+* The outcome will be the same if the player starts the game from the main menu or the choices from the rules.
 
 ![Difficulty level](readmefiles/difficulty.jpeg)
 
@@ -113,34 +113,32 @@ Try it out [here](https://battleshipcodeinstitute.herokuapp.com/)
 
 ### Player Testing
 
-The player starts with a choice of playing the game (G) or having a look at the rules (R).
+* The player starts with a choice of playing the game (G) or having a look at the rules (R).
 
 ![Player Testing](readmefiles/player-testing1.jpeg)
 
-If the player goes for the rules (R) option, the game will explain the conditions of the game.
+* If the player goes for the rules (R) option, the game will explain the conditions of the game.
 
 ![Player Testing](readmefiles/player-testing2.jpeg)
 
 
-From here the player can either go back to the first menu by choosing N for no or choose Y for yes.
-
-If the player goes for Y then the outcome will be as if the player chooses game (G) in the first menu. The next choice will be to determine the difficulty level.
+* From here the player can either go back to the first menu by choosing N for no or choose Y for yes. If the player goes for Y then the outcome will be as if the player chooses game (G) in the first menu. The next choice will be to determine the difficulty level.
 
 ![Player Testing](readmefiles/player-testing3.jpeg)
 
 
-When the player has chosen a difficulty level, the game will start and print a board and display the number of shots left. Depending on the difficulty level either 30, 20 or 10 shots will be displayed.
+* When the player has chosen a difficulty level, the game will start and print a board and display the number of shots left. Depending on the difficulty level either 30, 20 or 10 shots will be displayed.
 And a choice of putting the coordinates for the first shot in form of a choice from 1-7 and A-G.
 
 ![Player Testing](readmefiles/player-testing4.jpeg)
 
 
-The board will reprint an updated version of the choices the player made, a - for a miss and an X if the player sunk a ship and the number of shots remaining.
+* The board will reprint an updated version of the choices the player made, a - for a miss and an X if the player sunk a ship and the number of shots remaining.
 
 ![Player Testing](readmefiles/player-testing5.jpeg)
 
 
-When the player has used up all shots or sunk five ships the game will display the hidden ships and give a choice of try again Yes or No. If the player chooses yes, the menu of difficulty levels will be called, if the player goes for no then the game will exit.
+* When the player has used up all shots or sunk five ships the game will display the hidden ships and give a choice of try again Yes or No. If the player chooses yes, the menu of difficulty levels will be called, if the player goes for no then the game will exit.
 
 ![Player Testing](readmefiles/player-testing6.jpeg)
 ![Player Testing](readmefiles/player-testing7.jpeg)
@@ -158,10 +156,14 @@ I have chosen to ignore this warning since it is only one global statement, don'
 ### Manual Testing
 
 * Input anything else in the input field at the menus to see if the game crashed.
+
 ![Manual Testing](readmefiles/manual-testing1.jpeg)
 ![Manual Testing](readmefiles/manual-testing2.jpeg)
 ![Manual Testing](readmefiles/manual-testing3.jpeg)
+![Manual Testing](readmefiles/manual-testing4.jpeg)
+
 * The expectations were that the game would return an invalid option and ask the player to input a correct option.
+
 * The outcome was as expected.
 
 ### Bugs
