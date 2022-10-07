@@ -178,7 +178,7 @@ I have chosen to ignore this warning since it is only one global statement, don'
 ### Heruko
 
 I used Heruko to deploy my application.
-1. Push the project to GitHub using vs-code, make sure you have pushed the final version.
+1. Push the project to GitHub using vs-code, and make sure you have pushed the final version.
 2. On Heruko sign up for a free account or sign in with an existing one.
 3. Select new in the top right corner. From the menu chose "Create new app".
 4. Choose a unique name for the app and the correct region that you are in. For me it is Europe.
@@ -192,7 +192,7 @@ I used Heruko to deploy my application.
 12. Make sure that Python is first and not NodeJs, you can change the order of them by dragging and dropping them.
 13. Add a config var. The key will be "PORT" and the value is "8000", make sure you spell PORT in all capital letters.
 13. Navigate to the deploy tab.
-14. Scroll down and select the "Manual Deploy" and select "Deploy Branch".
+14. Scroll down and select "Manual Deploy" and select "Deploy Branch".
 15. Heruko will notify you when the app is successfully deployed.
 16. If you want to rebuild your app automatically you can also select the 'Enable Automatic Deploys' button which will then rebuild the app every time you push any changes.
 
